@@ -1,4 +1,7 @@
 import { useState, useRef } from "react";
+import * as pdfjsLib from "pdfjs-dist";
+import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 
 const VIOLET = "#7C3AED";
 const VIOLET_LIGHT = "#EDE9FE";
@@ -373,29 +376,73 @@ export default function App() {
 
   const toBase64 = f => new Promise((res,rej) => { const r=new FileReader(); r.onload=()=>res(r.result.split(",")[1]); r.onerror=()=>rej(new Error("Read failed")); r.readAsDataURL(f); });
   const toText   = f => new Promise((res,rej) => { const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=()=>rej(new Error("Read failed")); r.readAsText(f); });
+  const extractPdfText = async (file) => {
+    const buf = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+    let text="";
+    for (let i=1; i<=pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const c = await page.getTextContent();
+      text += c.items.map(i=>i.str).join(" ") + "\n";
+    }
+    return text;
+  };
 
   const process = async (file) => {
     setPhase("loading");
     try {
+      const key = import.meta.env.VITE_OPENROUTER_API_KEY;
+      if (!key || key === "your_openrouter_api_key_here") {
+        throw new Error("OpenRouter API key is not configured. Set VITE_OPENROUTER_API_KEY in .env");
+      }
       const ext = file.name.split(".").pop().toLowerCase();
-      let messages;
+      let content;
       if (["jpg","jpeg","png","webp"].includes(ext)) {
         const b64 = await toBase64(file);
-        messages = [{ role:"user", content:[{ type:"image", source:{ type:"base64", media_type:file.type||"image/jpeg", data:b64 }},{ type:"text", text:"Parse this CV image and return the JSON." }]}];
+        const mime = file.type || "image/jpeg";
+        content = [
+          { type:"text", text:"Parse this CV image and return the JSON." },
+          { type:"image_url", image_url:{ url:`data:${mime};base64,${b64}` } }
+        ];
       } else if (ext === "pdf") {
-        const b64 = await toBase64(file);
-        messages = [{ role:"user", content:[{ type:"document", source:{ type:"base64", media_type:"application/pdf", data:b64 }},{ type:"text", text:"Parse this CV PDF and return the JSON." }]}];
+        const text = await extractPdfText(file);
+        content = `Parse this CV and return the JSON:\n\n${text}`;
       } else {
         const text = await toText(file);
-        messages = [{ role:"user", content:`Parse this CV and return the JSON:\n\n${text}` }];
+        content = `Parse this CV and return the JSON:\n\n${text}`;
       }
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method:"POST", headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({ model:"claude-sonnet-4-6", max_tokens:1000, system:SYSTEM_PROMPT, messages })
+      const base = import.meta.env.DEV
+        ? "/api/openrouter"
+        : "https://openrouter.ai";
+      const res = await fetch(`${base}/api/v1/chat/completions`, {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization":`Bearer ${key}`,
+          "HTTP-Referer":"https://cv-parser.app",
+          "X-Title":"CV Parser"
+        },
+        body: JSON.stringify({
+          model:"openrouter/free",
+          messages:[
+            { role:"system", content:SYSTEM_PROMPT },
+            { role:"user", content }
+          ],
+          max_tokens:8192
+        })
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error?.message || "API error");
-      const raw = data.content.map(b=>b.text||"").join("").replace(/```json|```/g,"").trim();
+      if (!res.ok) {
+        const detail = data.error?.message || data.error?.code || JSON.stringify(data.error);
+        throw new Error(`Provider error: ${detail}`);
+      }
+      const msg = data.choices?.[0]?.message;
+      let raw = msg?.content?.replace(/```json|```/g,"").trim();
+      if (!raw && msg?.reasoning) {
+        const m = msg.reasoning.match(/\{[\s\S]*\}/);
+        if (m) raw = m[0].replace(/```json|```/g,"").trim();
+      }
+      if (!raw) throw new Error("Empty response from API");
       setCv(JSON.parse(raw));
       setPhase("result");
     } catch(err) {
