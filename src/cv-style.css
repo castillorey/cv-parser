@@ -116,7 +116,7 @@ body { padding: 24pt 10pt; }
 .skills .left-title { margin-bottom: 10pt; }
 .skills ul { padding-left: 12pt; font-size: 10.6pt; line-height: 1.22; }
 .footer {
-  position: absolute; right: 21pt; bottom: 17pt; width: 88pt; height: 20pt;
+  position: absolute; right: 0; bottom: 25pt; width: 88pt; height: 20pt;
   color: #080808; font-weight: 800;
 }
 .page-two .main { top: 160pt; }

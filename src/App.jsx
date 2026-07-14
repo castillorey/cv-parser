@@ -1,8 +1,10 @@
 import { useState, useRef } from "react";
 import { parseCV } from "./lib/api";
-import { generatePDF } from "./lib/pdfGenerator";
+import { generatePDF, generateTemplatePDF } from "./lib/pdfGenerator";
 import Spinner from "./components/Spinner";
 import CVPreview from "./components/CVPreview";
+import TemplatePreview from "./components/TemplatePreview";
+import StandardFormat from "./components/StandardFormat";
 
 const VIOLET = "#7C3AED";
 const VIOLET_LIGHT = "#EDE9FE";
@@ -38,6 +40,14 @@ export default function App() {
 
   const downloadPDF = () => {
     const html = generatePDF(cv);
+    const w = window.open("", "_blank");
+    w.document.write(html);
+    w.document.close();
+    setTimeout(() => w.print(), 900);
+  };
+
+  const downloadTemplatePDF = () => {
+    const html = generateTemplatePDF();
     const w = window.open("", "_blank");
     w.document.write(html);
     w.document.close();
@@ -114,12 +124,29 @@ export default function App() {
                 </span>
               ))}
             </div>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
+              <button onClick={() => setPhase("template")} style={{ background: "none", border: `1.5px dashed ${VIOLET}`, color: VIOLET, borderRadius: 8, padding: "8px 18px", fontSize: 12, fontWeight: 600, cursor: "pointer", transition: "all 0.15s ease" }}>
+                Preview Template
+              </button>
+            </div>
           </div>
         )}
 
         {phase === "loading" && (
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: 300, animation: "fadeUp 0.3s ease" }}>
             <Spinner />
+          </div>
+        )}
+
+        {phase === "template" && (
+          <div style={{ animation: "fadeUp 0.4s ease" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, flexWrap: "wrap", gap: 10 }}>
+              <button onClick={reset} style={{ background: "none", border: "none", color: "#9CA3AF", fontSize: 13, cursor: "pointer", padding: 0 }}>← Back</button>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button onClick={downloadTemplatePDF} style={{ background: VIOLET, border: "none", color: "#fff", borderRadius: 8, padding: "7px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>↓ Template PDF</button>
+              </div>
+            </div>
+            <TemplatePreview />
           </div>
         )}
 
@@ -135,7 +162,7 @@ export default function App() {
                 <button onClick={downloadPDF} style={{ background: VIOLET, border: "none", color: "#fff", borderRadius: 8, padding: "7px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>↓ PDF</button>
               </div>
             </div>
-            <CVPreview cv={cv} />
+            <StandardFormat cv={cv} />
           </div>
         )}
 

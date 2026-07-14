@@ -1,3 +1,6 @@
+import venaroLogo from "../assets/venaro_logo.png";
+import venaroLandmark from "../assets/venaro_landmark.png";
+
 const VIOLET = "#7C3AED";
 
 export default function CVPreview({ cv }) {
@@ -9,11 +12,8 @@ export default function CVPreview({ cv }) {
       <div style={{ width: 200, flexShrink: 0, background: leftGrad, display: "flex", flexDirection: "column" }}>
         <div style={{ height: 36, background: "#111" }} />
         <div style={{ padding: "18px 16px 10px" }}>
-          <div style={{ width: 72, height: 72, borderRadius: "50%", background: VIOLET, border: "2.5px solid rgba(255,255,255,0.4)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="18" r="9" fill="white" opacity="0.85" />
-              <path d="M6 42c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="white" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.85" />
-            </svg>
+          <div style={{ width: 72, height: 72, borderRadius: "50%", background: VIOLET, border: "2.5px solid rgba(255,255,255,0.4)", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <img src={venaroLogo} alt="Logo" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
         </div>
 
@@ -47,6 +47,7 @@ export default function CVPreview({ cv }) {
       <div style={{ flex: 1, display: "flex", flexDirection: "column", background: "#fff" }}>
         <div style={{ height: 36, background: "#111" }} />
 
+        
         {/* Name / Title */}
         <div style={{ padding: "16px 22px 12px", borderBottom: "1px solid #E5E7EB" }}>
           <div style={{ fontSize: 22, fontWeight: 800, color: VIOLET, letterSpacing: "-0.02em", lineHeight: 1 }}>{cv.name || "—"}</div>
@@ -121,7 +122,7 @@ export default function CVPreview({ cv }) {
 
         {/* Footer */}
         <div style={{ padding: "10px 22px", display: "flex", justifyContent: "flex-end", borderTop: "3px solid", borderImage: "linear-gradient(90deg,#7C3AED,#06B6D4,#10B981) 1" }}>
-          <span style={{ fontSize: 12, fontWeight: 800, color: "#111", letterSpacing: "-0.01em" }}>CVform.</span>
+          <img src={venaroLandmark} alt="Venaro" style={{ height: 32 }} />
         </div>
       </div>
     </div>
