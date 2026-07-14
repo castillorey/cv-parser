@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formato standard</title>
+  <style>
+    :root {
+      --page-w: 612pt;
+      --page-h: 792pt;
+      --purple: #8d40e9;
+      --soft: #efeffd;
+      --ink: #050505;
+      --muted: #6d6d72;
+      --line: #0d0d0d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #73777d;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+    }
+
+    body {
+      padding: 24pt 10pt;
+    }
+
+    .document {
+      display: grid;
+      gap: 24pt;
+      justify-content: center;
+    }
+
+    .page {
+      position: relative;
+      width: var(--page-w);
+      height: var(--page-h);
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 10pt 24pt rgba(0, 0, 0, 0.35);
+    }
+
+    .page::before,
+    .page::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 5.5pt;
+      z-index: 5;
+      background: linear-gradient(90deg, #1d0c2d 0%, #813af0 18%, #b4f000 50%, #68bfa1 73%, #00241d 100%);
+    }
+
+    .page::before {
+      top: 0;
+    }
+
+    .page::after {
+      bottom: 0;
+    }
+
+    .side {
+      position: absolute;
+      left: 0;
+      top: 120pt;
+      bottom: 5pt;
+      width: 237pt;
+      background: var(--soft);
+    }
+
+    .black-top {
+      position: absolute;
+      left: 237pt;
+      right: 0;
+      top: 5.5pt;
+      height: 66pt;
+      background: #020405;
+    }
+
+    .purple-block {
+      position: absolute;
+      left: 0;
+      top: 5.5pt;
+      width: 237pt;
+      height: 236pt;
+      border-bottom-right-radius: 118pt;
+      background: var(--purple);
+    }
+
+    .brand-mark {
+      position: absolute;
+      left: 80pt;
+      top: 55pt;
+      width: 78pt;
+      height: 108pt;
+      color: #fff;
+    }
+
+    .brand-mark svg,
+    .section-icon svg,
+    .mini-icon svg,
+    .footer svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .header {
+      position: absolute;
+      left: 244pt;
+      top: 88pt;
+      width: 318pt;
+    }
+
+    .name {
+      margin: 0;
+      color: var(--purple);
+      font-size: 33pt;
+      line-height: 0.95;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .role {
+      margin: 4pt 0 7pt;
+      font-size: 22pt;
+      line-height: 1;
+      font-weight: 400;
+    }
+
+    .header-line {
+      width: 324pt;
+      height: 2.6pt;
+      background: var(--line);
+      border-radius: 2pt;
+    }
+
+    .main {
+      position: absolute;
+      left: 244pt;
+      top: 152pt;
+      width: 340pt;
+      font-size: 10.4pt;
+      line-height: 1.18;
+    }
+
+    .section-title {
+      margin: 0 0 7pt;
+      font-size: 17.2pt;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .title-rule {
+      display: inline-block;
+      width: 138pt;
+      height: 2.7pt;
+      margin-left: 4pt;
+      vertical-align: middle;
+      background: var(--purple);
+      border-radius: 2pt;
+    }
+
+    .section-icon {
+      position: absolute;
+      left: -1pt;
+      top: 0;
+      width: 57pt;
+      height: 57pt;
+      border-radius: 50%;
+      background: var(--purple);
+      color: #fff;
+      padding: 13pt;
+    }
+
+    .section-with-icon {
+      position: relative;
+      padding-left: 59pt;
+      min-height: 62pt;
+    }
+
+    .education {
+      height: 174pt;
+    }
+
+    .education .section-title,
+    .work .section-title {
+      margin-top: 11pt;
+    }
+
+    .cert-title {
+      margin: 16pt 0 2pt 0;
+      font-size: 10.4pt;
+      font-weight: 800;
+      text-decoration: underline;
+    }
+
+    .main ul,
+    .left-panel ul {
+      margin: 0;
+      padding-left: 17pt;
+    }
+
+    .main li,
+    .left-panel li {
+      margin: 0 0 1.4pt;
+      padding-left: 1pt;
+    }
+
+    .work {
+      position: absolute;
+      left: 0;
+      top: 191pt;
+      width: 355pt;
+    }
+
+    .job {
+      margin-top: 7pt;
+      font-size: 10.4pt;
+      line-height: 1.19;
+    }
+
+    .job strong {
+      font-weight: 800;
+    }
+
+    .job ul {
+      margin-top: 3pt;
+    }
+
+    .left-panel {
+      position: absolute;
+      left: 25pt;
+      top: 258pt;
+      width: 195pt;
+      color: #050505;
+      font-size: 10.8pt;
+      line-height: 1.27;
+    }
+
+    .left-section {
+      position: relative;
+      margin-bottom: 31pt;
+      padding-left: 27pt;
+    }
+
+    .left-title {
+      margin: 0 0 9pt;
+      color: var(--muted);
+      font-size: 16pt;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .mini-icon {
+      position: absolute;
+      left: -4pt;
+      top: -7pt;
+      width: 28pt;
+      height: 28pt;
+      color: var(--muted);
+    }
+
+    .skills {
+      margin-top: 31pt;
+      padding-left: 25pt;
+    }
+
+    .skills .left-title {
+      margin-bottom: 10pt;
+    }
+
+    .skills ul {
+      padding-left: 12pt;
+      font-size: 10.6pt;
+      line-height: 1.22;
+    }
+
+    .footer {
+      position: absolute;
+      right: 21pt;
+      bottom: 17pt;
+      width: 88pt;
+      height: 20pt;
+      color: #080808;
+      font-weight: 800;
+    }
+
+    .page-two .main {
+      top: 160pt;
+    }
+
+    .page-two .job {
+      margin-top: 0;
+      width: 345pt;
+      font-size: 10.6pt;
+      line-height: 1.24;
+    }
+
+    .page-two .job + .job {
+      margin-top: 25pt;
+    }
+
+    @page {
+      size: letter;
+      margin: 0;
+    }
+
+    @media print {
+      html,
+      body {
+        width: var(--page-w);
+        margin: 0;
+        padding: 0;
+        background: #fff;
+      }
+
+      .document {
+        display: block;
+      }
+
+      .page {
+        box-shadow: none;
+        break-after: page;
+        page-break-after: always;
+      }
+
+      .page:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      body {
+        padding: 10px;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="document" aria-label="Formato standard">
+    <section class="page" aria-label="Página 1">
+      <div class="black-top"></div>
+      <div class="side"></div>
+      <div class="purple-block"></div>
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 90 122" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M66 8 22 32c-10 5-11 19-2 27l22 21-30 18c-9 6-5 19 6 14l47-27c9-5 11-18 3-26L45 38 76 20c9-6 1-18-10-12Z" stroke="currentColor" stroke-width="10" stroke-linejoin="round"/>
+          <path d="M40 38c-4 10-1 20 11 31" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+          <circle cx="83" cy="49" r="4" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <header class="header">
+        <h1 class="name">Vanessa Soles</h1>
+        <p class="role">Transport Dispatcher</p>
+        <div class="header-line"></div>
+      </header>
+
+      <aside class="left-panel">
+        <div class="left-section">
+          <div class="mini-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 35c-5-4-6-12-2-18C12 8 25 7 35 13c9 6 10 18 2 25-6 6-17 7-25 2L4 43l5-8Z"/>
+              <path d="M17 30c1-9 9-14 20-14"/>
+            </svg>
+          </div>
+          <h2 class="left-title">LANGUAGES</h2>
+          <ul>
+            <li>English - Advance</li>
+            <li>Spanish - Native</li>
+          </ul>
+        </div>
+
+        <div class="left-section skills">
+          <div class="mini-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+              <ellipse cx="24" cy="24" rx="7" ry="21" transform="rotate(18 24 24)"/>
+              <ellipse cx="24" cy="24" rx="7" ry="21" transform="rotate(78 24 24)"/>
+              <ellipse cx="24" cy="24" rx="7" ry="21" transform="rotate(138 24 24)"/>
+            </svg>
+          </div>
+          <h2 class="left-title">SKILLS</h2>
+          <ul>
+            <li>Ocean Carrier Portals (CMA CGM, Maersk, One, Hapag-Lloyd, MSC, COSCO, etc)</li>
+            <li>Terminal Portals (APM Terminals, Ports America, Georgia Ports Authority, Maher Terminals,)</li>
+            <li>Trinium</li>
+            <li>SAP</li>
+            <li>AES/ACE</li>
+            <li>INTTRA</li>
+            <li>Microsoft Dynamics 365</li>
+            <li>Track &amp; Trace portal</li>
+            <li>SeaRates</li>
+            <li>Excel</li>
+            <li>Outlook</li>
+            <li>Teams</li>
+            <li>Meet</li>
+            <li>Skype</li>
+            <li>Webex</li>
+            <li>Salesforce</li>
+            <li>Zendesk</li>
+            <li>Word</li>
+            <li>PowerPoint</li>
+            <li>Google Analytics</li>
+            <li>Power BI</li>
+            <li>Figma</li>
+            <li>Whimsical</li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="main">
+        <section class="section-with-icon education">
+          <div class="section-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 28c0-10 7-17 17-17 7 0 12 5 12 12 0 8-6 14-14 14H12"/>
+              <path d="M33 22c-7 2-12 7-12 15"/>
+              <path d="M33 37c-8 0-13-5-13-13"/>
+            </svg>
+          </div>
+          <h2 class="section-title">Education<span class="title-rule"></span></h2>
+          <ul>
+            <li><strong>B.S. in International Business</strong><br>Universidad de la Costa - 2023</li>
+          </ul>
+          <p class="cert-title">CERTIFICATIONS:</p>
+          <ul>
+            <li>UX/UI Design - Coderhouse Academy - 2025</li>
+            <li>Inbound Marketing Course - HubSpot Academy - 2023</li>
+            <li>Intermediate English Course - Colombo Americano - 2022</li>
+            <li>New Venture Development Course - Coursera &amp; Universidad de los Andes - 2021</li>
+          </ul>
+        </section>
+
+        <section class="section-with-icon work">
+          <div class="section-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="24" cy="14" r="6"/>
+              <path d="M14 39v-9c0-6 4-10 10-10s10 4 10 10v9H14Z"/>
+              <path d="M24 27v8"/>
+              <circle cx="24" cy="37" r="1.8" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <h2 class="section-title">Work Experience<span class="title-rule"></span></h2>
+          <div class="job">
+            <strong>Lean Solutions Group</strong><br>
+            <strong>Position: Bilingual Logistics Coordinator</strong><br>
+            <strong>Date: March 2023 – January 2026</strong><br>
+            <strong>Responsibilities:</strong>
+            <ul>
+              <li>Accounts: CMA CGM, Rohm &amp; Haas, Newell Rubbermaid, Dollar General, Yokohama Rubber, Celtic &amp; Co., Sailun Tires.</li>
+              <li>Coordinated cargo flows for global accounts, serving as a key liaison between local carriers and end clients to ensure timely pickups and deliveries.</li>
+              <li>Oversaw container logistics, scheduling distribution center and terminals appointments, monitoring ERD and LFD to minimize demurrage and detention risks.</li>
+              <li>Tracked container status continuously from availability and customs release through to empty return.</li>
+              <li>Managed real-time order tracking, validating updates to ETDs, availability dates, and delivery windows while ensuring compliance with client-specific requirements.</li>
+              <li>Audited, recorded, and resolved discrepancies in logistics charges (freight, fuel surcharges, accessorials), ensuring financial accuracy and data integrity across internal systems.</li>
+              <li>Acted as a primary point of contact for ocean carriers, terminals, and clients, delivering proactive support focused on issue resolution and operational efficiency.</li>
+              <li>Identified and addressed process bottlenecks, reducing errors in order processing and improving overall supply chain responsiveness.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="footer" aria-label="Salvatech">
+        <svg viewBox="0 0 154 34" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 6 8 14l10 10-11 6 6 2 16-9L19 13l11-6-8-1Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+          <text x="38" y="25" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800" fill="currentColor">Salvatech.</text>
+        </svg>
+      </div>
+    </section>
+
+    <section class="page page-two" aria-label="Página 2">
+      <div class="black-top"></div>
+      <div class="side"></div>
+      <div class="purple-block"></div>
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 90 122" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M66 8 22 32c-10 5-11 19-2 27l22 21-30 18c-9 6-5 19 6 14l47-27c9-5 11-18 3-26L45 38 76 20c9-6 1-18-10-12Z" stroke="currentColor" stroke-width="10" stroke-linejoin="round"/>
+          <path d="M40 38c-4 10-1 20 11 31" stroke="currentColor" stroke-width="10" stroke-linecap="round"/>
+          <circle cx="83" cy="49" r="4" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <header class="header">
+        <h1 class="name">Vanessa Soles</h1>
+        <p class="role">Transport Dispatcher</p>
+        <div class="header-line"></div>
+      </header>
+
+      <div class="main">
+        <div class="job">
+          <strong>Ricova S.A.S.</strong><br>
+          <strong>Position: Operations Intern</strong><br>
+          <strong>Date: February 2026 – April 2026</strong><br>
+          <strong>Responsibilities:</strong>
+          <ul>
+            <li>Led end to end management of the purchase and sales order cycle, ensuring full operational visibility and monitoring contribution margins to maintain profitability.</li>
+            <li>Coordinated export logistics by securing bookings and aligning supplier production schedules with international client delivery timelines and lead times.</li>
+            <li>Ensured customs compliance by preparing and filing EEI submissions through AES for U.S. origin shipments.</li>
+            <li>Maintained shipment documentation accuracy by auditing packing lists, invoices, and supporting evidence to mitigate operational risks.</li>
+            <li>Managed supplier financial relationships, processing payments in strict adherence to agreed commercial terms and credit arrangements.</li>
+            <li>Served as a regional point of contact, overseeing supplier communications from order placement through cargo onboarding and supporting operations across multiple international markets.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <strong>Atlantic Quantum Innovations</strong><br>
+          <strong>Position: Bilingual Customer Service Agent</strong><br>
+          <strong>Date: August 2022 - November 2022</strong><br>
+          <strong>Responsibilities:</strong>
+          <ul>
+            <li>Advised U.S. based clients on health insurance policies, coverage details, and contract terms, ensuring clear communication in a bilingual, multicultural environment.</li>
+            <li>Handled sensitive information in compliance with HIPAA regulations, maintaining data accuracy, security, and confidentiality.</li>
+            <li>Acted as a primary point of contact between members and healthcare providers, coordinating requests, claims, and service delivery.</li>
+            <li>Reviewed and validated benefits, account statements, and coverage details, ensuring accuracy and preventing service related errors.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer" aria-label="Salvatech">
+        <svg viewBox="0 0 154 34" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 6 8 14l10 10-11 6 6 2 16-9L19 13l11-6-8-1Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+          <text x="38" y="25" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800" fill="currentColor">Salvatech.</text>
+        </svg>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
