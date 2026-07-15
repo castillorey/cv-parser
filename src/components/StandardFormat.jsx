@@ -12,10 +12,6 @@ export default function StandardFormat({ cv }) {
           <img src={venaroLogo} alt="Logo" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </div>
 
-        {/* <div className="brand-mark" aria-hidden="true">
-          
-        </div> */}
-
         <header className="header">
           <h1 className="name">{cv.name || "—"}</h1>
           <p className="role">{cv.title}</p>
