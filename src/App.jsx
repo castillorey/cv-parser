@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { parseCV } from "./lib/api";
-import { generatePDF, generateTemplatePDF } from "./lib/pdfGenerator";
+import { generatePDF, generateTemplatePDF } from "./components/pdfGenerator";
 import Spinner from "./components/Spinner";
 import StandardFormat from "./components/StandardFormat";
 import SAMPLE_CV from "./sample-cv.json";
