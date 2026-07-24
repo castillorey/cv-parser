@@ -119,11 +119,15 @@ body { padding: 24pt 10pt; }
   position: absolute; right: 0; bottom: 25pt; width: 88pt; height: 20pt;
   color: #080808; font-weight: 800;
 }
-.page-two .main { top: 160pt; }
-.page-two .job {
-  margin-top: 0; width: 345pt; font-size: 10.6pt; line-height: 1.24;
+.page-continuation .main { top: 152pt; }
+.page-continuation .work {
+  position: relative;
+  left: auto;
+  top: auto;
+  width: 340pt;
 }
-.page-two .job + .job { margin-top: 25pt; }
+.page-continuation .job { margin-top: 7pt; }
+.page-continuation .job + .job { margin-top: 25pt; }
 @page { size: letter; margin: 0; }
 @media print {
   html, body { width: var(--page-w); margin: 0; padding: 0; background: #fff; }
