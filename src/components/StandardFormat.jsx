@@ -2,10 +2,10 @@ import venaroLogo from "../assets/venaro_logo.png";
 import venaroLandmark from "../assets/venaro_landmark.png";
 import "../cv-style.css";
 
-const JOB_BASE_HEIGHT = 60;
-const JOB_LINE_HEIGHT = 13;
-const PAGE_1_WORK_CAPACITY = 340;
-const CONTINUATION_WORK_CAPACITY = 530;
+const JOB_BASE_HEIGHT = 82;
+const JOB_LINE_HEIGHT = 14;
+const PAGE_1_WORK_CAPACITY = 310;
+const CONTINUATION_WORK_CAPACITY = 500;
 
 function estimateJobHeight(ex) {
   const responsibilities = (ex.responsibilities || []).filter(Boolean).length;

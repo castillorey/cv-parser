@@ -67,6 +67,7 @@ body { padding: 24pt 10pt; }
 .main {
   position: absolute; left: 244pt; top: 152pt; width: 340pt;
   font-size: 10.4pt; line-height: 1.18;
+  padding-bottom: 25pt;
 }
 .section-title {
   margin: 0 0 7pt; font-size: 17.2pt; line-height: 1; font-weight: 800;
@@ -119,7 +120,7 @@ body { padding: 24pt 10pt; }
   position: absolute; right: 0; bottom: 25pt; width: 88pt; height: 20pt;
   color: #080808; font-weight: 800;
 }
-.page-continuation .main { top: 152pt; }
+.page-continuation .main { top: 152pt; padding-bottom: 25pt; }
 .page-continuation .work {
   position: relative;
   left: auto;

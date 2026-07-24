@@ -2,9 +2,8 @@ import { useState, useRef } from "react";
 import { parseCV } from "./lib/api";
 import { generatePDF, generateTemplatePDF } from "./lib/pdfGenerator";
 import Spinner from "./components/Spinner";
-import CVPreview from "./components/CVPreview";
-import TemplatePreview from "./components/TemplatePreview";
 import StandardFormat from "./components/StandardFormat";
+import SAMPLE_CV from "./sample-cv.json";
 
 const VIOLET = "#7C3AED";
 const VIOLET_LIGHT = "#EDE9FE";
@@ -146,7 +145,7 @@ export default function App() {
                 <button onClick={downloadTemplatePDF} style={{ background: VIOLET, border: "none", color: "#fff", borderRadius: 8, padding: "7px 18px", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>↓ Template PDF</button>
               </div>
             </div>
-            <TemplatePreview />
+            <StandardFormat cv={SAMPLE_CV} />
           </div>
         )}
 
