@@ -46,7 +46,7 @@ export default function App() {
   };
 
   const downloadTemplatePDF = () => {
-    const html = generateTemplatePDF();
+    const html = generatePDF(SAMPLE_CV);
     const w = window.open("", "_blank");
     w.document.write(html);
     w.document.close();
