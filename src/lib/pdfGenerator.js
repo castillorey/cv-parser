@@ -154,6 +154,70 @@ export function generateTemplatePDF() {
   return generatePDF(TEMPLATE_CV);
 }
 
+const PAGE_H = 792;
+const PAGE_TOP = 160;
+const PAGE_BOTTOM = 25;
+const PAGE_PAD_BOTTOM = 20;
+const PAGE_SAFETY = 6;
+const MAIN_AVAIL = PAGE_H - PAGE_TOP - PAGE_BOTTOM - PAGE_PAD_BOTTOM - PAGE_SAFETY;
+
+const measureJobHeights = (jobs) => {
+  if (typeof document === "undefined") return null;
+  try {
+    const page = document.createElement("section");
+    page.className = "page page-two";
+    page.style.cssText =
+      "position:absolute;left:-20000px;top:0;width:612pt;height:auto;overflow:visible;box-shadow:none;";
+    const main = document.createElement("div");
+    main.className = "main";
+    main.style.cssText = "position:relative;left:0;top:0;right:auto;bottom:auto;";
+    const group = document.createElement("div");
+    main.appendChild(group);
+    page.appendChild(main);
+    document.body.appendChild(page);
+    const heights = [];
+    try {
+      for (const h of jobs) {
+        group.insertAdjacentHTML("beforeend", h);
+        heights.push(group.offsetHeight);
+      }
+    } finally {
+      document.body.removeChild(page);
+    }
+    return heights;
+  } catch (err) {
+    return null;
+  }
+};
+
+const packIntoGroups = (jobs, heights, limit) => {
+  const groups = [];
+  let start = 0;
+  for (let i = 0; i < heights.length; i++) {
+    const h = heights[i] - (start > 0 ? heights[start - 1] : 0);
+    if (h > limit && i > start) {
+      groups.push(jobs.slice(start, i));
+      start = i;
+    }
+  }
+  if (start < jobs.length) groups.push(jobs.slice(start));
+  return groups;
+};
+
+const workPagesHTML = (groups, cv) =>
+  groups
+    .map((group, i) => `
+    <section class="page page-two" aria-label="Página ${i + 2}">
+      <div class="black-top"></div>
+      <div class="side"></div>
+      <div class="purple-block"></div>
+      ${brandMark}
+      ${pageHeader(cv)}
+      <div class="main">${group.join("")}</div>
+      ${pageFooter}
+    </section>`)
+    .join("");
+
 export function generatePDF(cv) {
   const totalR = (cv.experience || []).reduce(
     (sum, ex) => sum + (ex.responsibilities || []).length, 0
@@ -161,6 +225,12 @@ export function generatePDF(cv) {
   const needsPage2 = cv.experience?.length > 1 || totalR > 8;
   const page1Exp = needsPage2 ? [cv.experience[0]] : cv.experience;
   const page2Exp = needsPage2 ? cv.experience.slice(1) : [];
+
+  const page2Jobs = page2Exp.map(jobHTML);
+  const heights = measureJobHeights(page2Jobs);
+  const groups = heights && page2Jobs.length
+    ? packIntoGroups(page2Jobs, heights, MAIN_AVAIL)
+    : (page2Jobs.length ? [page2Jobs] : []);
 
   return `<!DOCTYPE html>
 <html lang="es">
@@ -185,16 +255,7 @@ export function generatePDF(cv) {
       </div>
       ${pageFooter}
     </section>
-    ${page2Exp.length ? `
-    <section class="page page-two" aria-label="Página 2">
-      <div class="black-top"></div>
-      <div class="side"></div>
-      <div class="purple-block"></div>
-      ${brandMark}
-      ${pageHeader(cv)}
-      <div class="main">${page2Exp.map(jobHTML).join("")}</div>
-      ${pageFooter}
-    </section>` : ""}
+    ${workPagesHTML(groups, cv)}
   </main>
 </body>
 </html>`;

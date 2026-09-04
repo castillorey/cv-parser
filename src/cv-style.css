@@ -94,6 +94,7 @@ body { padding: 24pt 10pt; }
 .main li, .left-panel li { margin: 0 0 1.4pt; padding-left: 1pt; }
 .work {
   position: absolute; left: 0; top: 191pt; right: 0; bottom: 25pt; width: 355pt;
+  padding-bottom: 20pt;
 }
 .job { margin-top: 7pt; font-size: 10.4pt; line-height: 1.19; }
 .job strong { font-weight: 800; }
