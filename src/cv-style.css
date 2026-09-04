@@ -67,13 +67,13 @@ body { padding: 24pt 10pt; }
 .main {
   position: absolute; left: 244pt; top: 152pt; right: 0; bottom: 25pt; width: 340pt;
   font-size: 10.4pt; line-height: 1.18;
-  padding-bottom: 20pt;
+  padding-bottom: 50pt;
 }
 .section-title {
   margin: 0 0 7pt; font-size: 17.2pt; line-height: 1; font-weight: 800;
 }
 .title-rule {
-  display: inline-block; width: 138pt; height: 2.7pt;
+  display: inline-block; width: 128pt; height: 2.7pt;
   margin-left: 4pt; vertical-align: middle;
   background: var(--purple); border-radius: 2pt;
 }
@@ -85,7 +85,6 @@ body { padding: 24pt 10pt; }
 .section-with-icon {
   position: relative; padding-left: 59pt; min-height: 62pt;
 }
-.education { height: 174pt; }
 .education .section-title, .work .section-title { margin-top: 11pt; }
 .cert-title {
   margin: 16pt 0 2pt 0; font-size: 10.4pt; font-weight: 800; text-decoration: underline;
@@ -93,7 +92,7 @@ body { padding: 24pt 10pt; }
 .main ul, .left-panel ul { margin: 0; padding-left: 17pt; }
 .main li, .left-panel li { margin: 0 0 1.4pt; padding-left: 1pt; }
 .work {
-  position: absolute; left: 0; top: 191pt; right: 0; bottom: 25pt; width: 355pt;
+  position: relative; width: 340pt;
 }
 .job { margin-top: 7pt; font-size: 10.4pt; line-height: 1.19; }
 .job strong { font-weight: 800; }
@@ -120,14 +119,15 @@ body { padding: 24pt 10pt; }
   position: absolute; right: 0; bottom: 25pt; width: 88pt; height: 20pt;
   color: #080808; font-weight: 800;
 }
-.page-two .main {
-  top: 160pt;
-  bottom: 25pt;
+.page-continuation .main { top: 152pt; padding-bottom: 50pt; }
+.page-continuation .work {
+  position: absolute;
+  left: 5;
+  top: 15px;
+  width: 340pt;
 }
-.page-two .job {
-  margin-top: 0; width: 345pt; font-size: 10.6pt; line-height: 1.24;
-}
-.page-two .job + .job { margin-top: 25pt; }
+.page-continuation .job { margin-top: 7pt; }
+.page-continuation .job + .job { margin-top: 25pt; }
 @page { size: letter; margin: 0; }
 @media print {
   html, body { width: var(--page-w); margin: 0; padding: 0; background: #fff; }

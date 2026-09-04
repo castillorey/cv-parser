@@ -1,0 +1,111 @@
+{
+  "name": "NATALIA PAREDES",
+  "title": "Insurance Analyst",
+  "email": "17nataparedes@gmail.com",
+  "phone": "+57 300 296 7979",
+  "location": "Sogamoso, Colombia",
+  "linkedin": "linkedin.com/in/nataparedes/",
+  "website": "",
+  "spokenLanguages": [
+    "Spanish - Native",
+    "English - Professional"
+  ],
+  "skills": [
+    "Applied Epic",
+    "EZLynx",
+    "Microsoft Excel",
+    "Asana"
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science in Psychology",
+      "institution": "",
+      "year": "2023"
+    },
+    {
+      "degree": "Advanced Diploma in Clinical Child Psychology",
+      "institution": "",
+      "year": "2022"
+    },
+    {
+      "degree": "Recruiting, Hiring, and Onboarding Employees",
+      "institution": "POLITÉCNICO GRANCOLOMBIANO",
+      "year": "2025"
+    },
+    {
+      "degree": "Introduction to Project Management",
+      "institution": "University of Minnesota",
+      "year": "2024"
+    },
+    {
+      "degree": "Project Management Foundations, Initiation and Planning",
+      "institution": "IBM",
+      "year": "2024"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Recruiting, Hiring, and Onboarding Employees",
+      "issuer": "POLITÉCNICO GRANCOLOMBIANO",
+      "year": "2025"
+    },
+    {
+      "name": "Introduction to Project Management",
+      "issuer": "University of Minnesota",
+      "year": "2024"
+    },
+    {
+      "name": "Project Management Foundations, Initiation and Planning",
+      "issuer": "IBM",
+      "year": "2024"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Premier Protection Insurance",
+      "role": "Insurance Analyst",
+      "from": "Aug 2025",
+      "to": "Present",
+      "responsibilities": [
+        "Analyze commercial insurance policies, coverages, exclusions, and pricing structures to identify the most suitable and cost-effective solutions for clients.",
+        "Analyze and compare carrier quotations, negotiating competitive pricing and coverage terms while developing insurance recommendations aligned with client needs, risk exposure, and business objectives.",
+        "Manage policy renewals, endorsements, and insurance documentation while ensuring accuracy and compliance.",
+        "Review contracts, policy forms, and supporting documentation to identify risks, limitations, and potential coverage gaps.",
+        "Maintain client records within Applied Epic and EZLynx, ensuring data integrity and operational efficiency.",
+        "Coordinate directly with clients to explain coverage options, resolve issues, and provide ongoing account support."
+      ]
+    },
+    {
+      "company": "Premier Protection Insurance",
+      "role": "Insurance Assistant",
+      "from": "May 2025",
+      "to": "Jul 2025",
+      "responsibilities": [
+        "Supported daily insurance operations, including policy processing, renewals, endorsements, and document management.",
+        "Assisted in preparing quotations and coordinating communications among clients, brokers, carriers, and internal teams.",
+        "Maintained accurate policy and client records within agency management systems."
+      ]
+    },
+    {
+      "company": "LanguageLine Solutions & Idiomas TEP",
+      "role": "Language Services Specialist (Translation & Interpretation)",
+      "from": "Jul 2023",
+      "to": "May 2025",
+      "responsibilities": [
+        "Provided professional English-Spanish translation and interpretation services across healthcare, education, and business environments.",
+        "Facilitated communication between clients, patients, professionals, and organizations while ensuring linguistic accuracy and cultural appropriateness.",
+        "Worked with healthcare, educational, and business-related content requiring confidentiality, accuracy, and strong attention to detail."
+      ]
+    },
+    {
+      "company": "UnitedHealthcare – Dual Special Needs Plan (DSNP), Concentrix",
+      "role": "Customer Service Advocate",
+      "from": "Sep 2021",
+      "to": "Nov 2022",
+      "responsibilities": [
+        "Resolved customer inquiries related to benefits, eligibility, claims, authorizations, and financial matters.",
+        "Coordinated communication between members, providers, and internal departments to facilitate issue resolution."
+      ]
+    }
+  ]
+}
