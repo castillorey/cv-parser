@@ -4,8 +4,8 @@ import "../cv-style.css";
 
 const JOB_BASE_HEIGHT = 82;
 const JOB_LINE_HEIGHT = 14;
-const PAGE_1_WORK_CAPACITY = 310;
-const CONTINUATION_WORK_CAPACITY = 500;
+const PAGE_1_WORK_CAPACITY = 285;
+const CONTINUATION_WORK_CAPACITY = 475;
 
 function estimateJobHeight(ex) {
   const responsibilities = (ex.responsibilities || []).filter(Boolean).length;

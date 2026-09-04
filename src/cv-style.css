@@ -67,13 +67,13 @@ body { padding: 24pt 10pt; }
 .main {
   position: absolute; left: 244pt; top: 152pt; width: 340pt;
   font-size: 10.4pt; line-height: 1.18;
-  padding-bottom: 25pt;
+  padding-bottom: 50pt;
 }
 .section-title {
   margin: 0 0 7pt; font-size: 17.2pt; line-height: 1; font-weight: 800;
 }
 .title-rule {
-  display: inline-block; width: 138pt; height: 2.7pt;
+  display: inline-block; width: 128pt; height: 2.7pt;
   margin-left: 4pt; vertical-align: middle;
   background: var(--purple); border-radius: 2pt;
 }
@@ -92,7 +92,7 @@ body { padding: 24pt 10pt; }
 .main ul, .left-panel ul { margin: 0; padding-left: 17pt; }
 .main li, .left-panel li { margin: 0 0 1.4pt; padding-left: 1pt; }
 .work {
-  position: relative; width: 355pt;
+  position: relative; width: 340pt;
 }
 .job { margin-top: 7pt; font-size: 10.4pt; line-height: 1.19; }
 .job strong { font-weight: 800; }
@@ -119,11 +119,11 @@ body { padding: 24pt 10pt; }
   position: absolute; right: 0; bottom: 25pt; width: 88pt; height: 20pt;
   color: #080808; font-weight: 800;
 }
-.page-continuation .main { top: 152pt; padding-bottom: 25pt; }
+.page-continuation .main { top: 152pt; padding-bottom: 50pt; }
 .page-continuation .work {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 5;
+  top: 15px;
   width: 340pt;
 }
 .page-continuation .job { margin-top: 7pt; }
