@@ -1,12 +1,9 @@
-import { SYSTEM_PROMPT } from "./prompts";
 import { toBase64, toText, extractPdfText } from "./fileUtils";
 
-export async function parseCV(file) {
-  const key = import.meta.env.VITE_OPENROUTER_API_KEY;
-  if (!key || key === "your_openrouter_api_key_here") {
-    throw new Error("OpenRouter API key is not configured. Set VITE_OPENROUTER_API_KEY in .env");
-  }
+const EDGE_FUNCTION_URL =
+  "https://useejgiprosrfiabgukn.supabase.co/functions/v1/parse-cv";
 
+export async function parseCV(file) {
   const ext = file.name.split(".").pop().toLowerCase();
   let content;
 
@@ -25,41 +22,26 @@ export async function parseCV(file) {
     content = `Parse this CV and return the JSON:\n\n${text}`;
   }
 
-  const base = import.meta.env.DEV
-    ? "/api/openrouter"
-    : "https://openrouter.ai";
-
-  const res = await fetch(`${base}/api/v1/chat/completions`, {
+  const res = await fetch(EDGE_FUNCTION_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${key}`,
-      "HTTP-Referer": "https://cv-parser.app",
-      "X-Title": "CV Parser",
     },
-    body: JSON.stringify({
-      model: "openrouter/free",
-      messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content },
-      ],
-      max_tokens: 8192,
-    }),
+    body: JSON.stringify({ content }),
   });
 
-  const data = await res.json();
   if (!res.ok) {
-    const detail = data.error?.message || data.error?.code || JSON.stringify(data.error);
-    throw new Error(`Provider error: ${detail}`);
+    let detail = `HTTP ${res.status}`;
+    try {
+      const data = await res.json();
+      detail = data.error || detail;
+    } catch {
+      /* ignore */
+    }
+    throw new Error(detail);
   }
 
-  const msg = data.choices?.[0]?.message;
-  let raw = msg?.content?.replace(/```json|```/g, "").trim();
-  if (!raw && msg?.reasoning) {
-    const match = msg.reasoning.match(/\{[\s\S]*\}/);
-    if (match) raw = match[0].replace(/```json|```/g, "").trim();
-  }
-  if (!raw) throw new Error("Empty response from API");
-
+  const raw = await res.text();
+  if (!raw) throw new Error("Empty response from server");
   return JSON.parse(raw);
 }
