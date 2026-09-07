@@ -121,6 +121,20 @@ body { padding: 24pt 10pt; }
   position: absolute; right: 0; bottom: 25pt; width: 88pt; height: 20pt;
   color: #080808; font-weight: 800;
 }
+.page-continuation .main {
+  top: 160pt;
+  padding-bottom: 50pt;
+}
+.page-continuation .work {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+}
+.page-continuation .job { margin-top: 7pt; }
+.page-continuation .job + .job { margin-top: 25pt; }
 .page-two .main {
   top: 160pt;
   bottom: 25pt;
